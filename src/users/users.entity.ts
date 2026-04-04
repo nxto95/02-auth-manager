@@ -1,8 +1,10 @@
+import { Exclude } from 'class-transformer';
 import { UserRole } from 'src/types';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  Index,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -11,19 +13,22 @@ import {
 export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-  @Column()
+  @Column({ nullable: true })
+  @Index('unique_username', ['username'], { unique: true })
   username: string;
   @Column()
+  @Index('unique_email', ['email'], { unique: true })
   email: string;
-  @Column()
+  @Column({ select: false })
+  @Exclude()
   password: string;
-  @Column()
+  @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
   role: UserRole;
-  @Column()
+  @Column({ nullable: true })
   refreshToken: string;
-  @Column()
+  @Column({ default: false })
   isEmailVerified: boolean;
-  @Column()
+  @Column({ default: false })
   isAccountVerified: boolean;
   @CreateDateColumn()
   createdAt: Date;

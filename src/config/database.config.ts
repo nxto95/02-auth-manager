@@ -1,5 +1,6 @@
 import { registerAs } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { User } from 'src/users/users.entity';
 
 export default registerAs('database', (): TypeOrmModuleOptions => {
   const isDev = process.env.NODE_ENV === 'development';
@@ -11,6 +12,7 @@ export default registerAs('database', (): TypeOrmModuleOptions => {
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.POSTGRES_DB,
     autoLoadEntities: true,
+    entities: [User],
     synchronize: isDev,
     logging: true,
   };
