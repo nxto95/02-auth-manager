@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { Request } from 'express';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { IJwtPayload, JwtRefreshUser } from 'src/types';
+import { IJwtPayload, JwtRefreshUser } from '../../types';
 
 @Injectable()
 export class JwtRefreshStrategy extends PassportStrategy(Strategy, 'refresh') {
@@ -34,6 +34,6 @@ export class JwtRefreshStrategy extends PassportStrategy(Strategy, 'refresh') {
       throw new UnauthorizedException('Refresh token missing');
     }
 
-    return { sub: payload.sub, role: payload.role, refreshToken };
+    return { id: payload.sub, role: payload.role, refreshToken };
   }
 }

@@ -12,7 +12,7 @@ export type AccessToken = string;
 export type RefreshToken = string;
 
 export interface JwtRefreshUser {
-  sub: string;
+  id: string;
   role: UserRole;
   refreshToken: string;
 }

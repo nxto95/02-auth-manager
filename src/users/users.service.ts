@@ -7,8 +7,8 @@ import { InjectDataSource } from '@nestjs/typeorm';
 import { DataSource, QueryFailedError } from 'typeorm';
 import { User } from './users.entity';
 import * as argon2 from 'argon2';
-import { CreateUserDto, UpdateUserDto } from 'src/dtos';
-import { RefreshToken } from 'src/types';
+import { CreateUserDto, UpdateUserDto } from '../dtos';
+import { RefreshToken } from '../types';
 
 @Injectable()
 export class UsersService {
@@ -112,7 +112,7 @@ export class UsersService {
       .createQueryBuilder(User, 'user')
       .update()
       .set({ refreshToken })
-      .where('user.id = :userId', { userId })
+      .where('id = :userId', { userId })
       .execute();
     if (result.affected === 0)
       throw new NotFoundException(`user with this id ${userId} not exist`);
@@ -123,7 +123,7 @@ export class UsersService {
       .createQueryBuilder(User, 'user')
       .update()
       .set({ refreshToken: null })
-      .where('user.id = :userId', { userId })
+      .where('id = :userId', { userId })
       .execute();
     if (result.affected === 0)
       throw new NotFoundException(`user with this id ${userId} not exist`);
