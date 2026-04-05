@@ -18,7 +18,12 @@ export class BlackListedTokensGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext) {
     const request = context.switchToHttp().getRequest<Request>();
-    const excludedPaths = ['/auth/login', '/auth/register', '/auth/refresh'];
+    const excludedPaths = [
+      '/auth/login',
+      '/auth/register',
+      '/auth/refresh',
+      '/auth/admin',
+    ];
     if (excludedPaths.includes(request.url)) return true;
     const authHeader = request.get('authorization');
     if (!authHeader)

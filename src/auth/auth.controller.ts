@@ -8,11 +8,9 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
-import { LocalAuthGuard } from './guards/local.guard';
 import { CreateUserDto } from '../dtos';
-import type { AccessToken, RefreshToken, UserRole } from '../types';
-import { JwtAccessGuard } from './guards/access.guard';
-import { JwtRefreshGuard } from './guards/refresh.guard';
+import { AccessToken, RefreshToken, UserRole } from '../types';
+import { JwtAccessGuard, JwtRefreshGuard, LocalAuthGuard } from './guards';
 
 @Controller('auth')
 export class AuthController {

@@ -1,5 +1,4 @@
 import { Exclude } from 'class-transformer';
-import { UserRole } from 'src/types';
 import {
   Column,
   CreateDateColumn,
@@ -8,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { UserRole } from '../types';
 
 @Entity({ name: 'users' })
 export class User {
